@@ -3,4 +3,6 @@
     <string name="title_activity_login">Sign in</string>
 
     <string name="location_tip">您选择的位置为</string>
+    <string name="whocame">有谁来过</string>
+    <string name="user">用户信息</string>
 </resources>

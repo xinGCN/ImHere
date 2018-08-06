@@ -1,6 +1,7 @@
 package com.xing.imhere.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity_main_saysth) EditText saySth;
     @BindView(R.id.activity_main_where) TextView where;
 
+    private static final String TAG = "MainActivity";
     private static final int CHOOSE_ITEM = 1;
 
     public LocationClient mLocationClient = null;
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             if(errorCode == BaiDuErrorCode.LOCATION_SUCCESS_INTERNET){
                 mHandler.obtainMessage(BaiDuErrorCode.LOCATION_SUCCESS_INTERNET,location).sendToTarget();
             }else{
-                L.e("location error code: " + errorCode);
+                L.e(TAG,"location error code: " + errorCode);
             }
             mLocationClient.stop();
         }

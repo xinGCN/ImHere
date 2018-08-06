@@ -7,9 +7,8 @@ import android.util.Log;
  */
 public class L {
     private static boolean debug = true;
-    private static String TAG = "xinG";
 
-    public static int e(String msg){
+    public static int e(String TAG,String msg){
         return Log.e(TAG,msg);
     }
 }
