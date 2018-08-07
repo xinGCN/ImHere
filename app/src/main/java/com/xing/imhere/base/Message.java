@@ -8,9 +8,11 @@ package com.xing.imhere.base;
 public class Message {
     private Integer id;
     private String account;
-    private String location_1;
-    private String location_2;
+    private double lat;
+    private double lon;
+    private String location;
     private String message;
+    private String time;
 
     public Message(){}
 
@@ -31,14 +33,6 @@ public class Message {
         this.account = account;
     }
 
-    public void setLocation_1(String location_1) {
-        this.location_1 = location_1;
-    }
-
-    public void setLocation_2(String location_2) {
-        this.location_2 = location_2;
-    }
-
     public void setMessage(String message) {
         this.message = message;
     }
@@ -52,26 +46,61 @@ public class Message {
         return account;
     }
 
-    public String getLocation_1() {
-        return location_1;
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                ", location='" + location + '\'' +
+                ", message='" + message + '\'' +
+                ", time='" + time + '\'' +
+                '}';
     }
 
-    public String getLocation_2() {
-        return location_2;
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getMessage() {
         return message;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", account='" + account + '\'' +
-                ", location_1='" + location_1 + '\'' +
-                ", location_2='" + location_2 + '\'' +
-                ", message='" + message + '\'' +
-                '}';
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+
+
+    public boolean hasNull(){
+        if(this.account == null || this.location == null ||
+                this.message == null)
+            return true;
+        return false;
     }
 }

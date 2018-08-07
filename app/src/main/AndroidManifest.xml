@@ -36,7 +36,6 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="uBqdy79xYm4gNTzTDVaVROG5ue6O1ejk" />
 
-        <activity android:name=".activity.MainActivity"></activity>
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
@@ -46,14 +45,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote"/>
 
-        <activity android:name=".activity.ImHereActivity"></activity>
+        <activity android:name=".activity.ImHereActivity">
+
+        </activity>
     </application>
 
 </manifest>

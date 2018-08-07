@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity{
 
     @OnClick(R.id.activity_login_submit)
     public void submit(){
-        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        startActivity(new Intent(LoginActivity.this,WhoCameActivity.class));
         finish();
     }
 }

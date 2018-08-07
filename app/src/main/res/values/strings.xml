@@ -5,4 +5,8 @@
     <string name="location_tip">您选择的位置为</string>
     <string name="whocame">有谁来过</string>
     <string name="user">用户信息</string>
+    <string name="cancel">取消</string>
+    <string name="submit">发表</string>
+    <string name="saysth">说点什么吧...</string>
+    <string name="location">地点</string>
 </resources>
