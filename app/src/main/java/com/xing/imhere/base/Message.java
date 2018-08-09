@@ -1,5 +1,8 @@
 package com.xing.imhere.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author xinG
  * @date 2018/8/2 0002 17:07
@@ -102,5 +105,17 @@ public class Message {
                 this.message == null)
             return true;
         return false;
+    }
+
+    public CardBase toCardBase(){
+        return new CardBase(this.getMessage(),this.getTime());
+    }
+
+    public static List<CardBase> toCardBases(List<Message> msgs){
+        List<CardBase> cardBases = new ArrayList<>();
+        for (Message msg:msgs) {
+            cardBases.add(new CardBase(msg.getMessage(),msg.getTime()));
+        }
+        return cardBases;
     }
 }

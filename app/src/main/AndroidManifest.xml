@@ -39,23 +39,35 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
+
         <activity android:name=".activity.WhoCameActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <activity android:name=".activity.ImHereActivity">
         </activity>
 
         <service
             android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote"/>
+            android:enabled="true"/>
+        <!--出了很神奇的错误，在BDLocationService中使用了百度地图的定位功能
+            一开始在Activity中启动卸载服务都很正常能定位成功
+            后来想把Service集成为全局变量于是改在Application中启动
+            但是报了莫名的错误，大概分成两种情况
+            1.为重复报不能强转IBinder为我BDLocationService.Binder错误
+            2.能成功启动，但是只定位一次，Timer失效，但是在我卸载Service后突然抽风一样的不停
+                重复启动卸载Service的作用，同时可以定位，直到我将整个Application杀死才停止
 
-        <activity android:name=".activity.ImHereActivity">
+            没能找到原因和百分重现bug的方法，但是以外找到了解决方案，即为下面注释掉的这句代码
+            推断出错原因是BaiduLocationApi提供给开发者信息不够所以导致了惨案发生。（其实就是懒得看百度定位源码）
 
-        </activity>
+            出错代码：android:process=":remote",此代码为百度官方文档提供
+        -->
+
+        <service android:name=".service.BDLocationService"/>
     </application>
 
 </manifest>

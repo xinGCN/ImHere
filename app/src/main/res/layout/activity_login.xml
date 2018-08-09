@@ -10,12 +10,15 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_login_usr"/>
+        android:id="@+id/activity_login_account"
+        android:layout_margin="@dimen/min_dimen"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_login_pass"/>
+        android:id="@+id/activity_login_pass"
+        android:layout_margin="@dimen/min_dimen"/>
+
 
     <Button
         android:layout_width="wrap_content"

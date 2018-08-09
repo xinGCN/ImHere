@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,8 +18,11 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
+import com.xing.imhere.ImHereApplication;
 import com.xing.imhere.R;
 import com.xing.imhere.http.HttpService;
+import com.xing.imhere.http.ImHereHttpUrl;
+import com.xing.imhere.service.BDLocationService;
 import com.xing.imhere.util.BaiDuErrorCode;
 import com.xing.imhere.util.L;
 import com.xing.imhere.util.T;
@@ -32,8 +37,6 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ImHereActivity extends AppCompatActivity {
     @BindView(R.id.activity_im_here_saysth)
@@ -43,10 +46,12 @@ public class ImHereActivity extends AppCompatActivity {
 
     private static final String TAG = "ImHereActivity";
     private LocationClient mLocationClient = null;
-    private MyLocationListener myListener = new MyLocationListener();
+//    private MyLocationListener myListener = new MyLocationListener();
     private Context ctx = null;
     private com.xing.imhere.base.Message sendMsg;
     private String[] poi;
+    private BDLocationService.Binder binder;
+    private HttpService httpService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +62,33 @@ public class ImHereActivity extends AppCompatActivity {
 
         sendMsg = new com.xing.imhere.base.Message();
         sendMsg.setAccount("15996464635");
-        mLocationClient = new LocationClient(getApplicationContext());
-        mLocationClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setIsNeedLocationPoiList(true);
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-        mLocationClient.setLocOption(option);
-        mLocationClient.start();
+
+        binder = ((ImHereApplication)getApplication()).getmBinder();
+        httpService = ((ImHereApplication)getApplication()).getHttpService();
+
+        if(binder != null&&binder.isImmediate()){
+            sendMsg.setLat(binder.getLastLat());
+            sendMsg.setLon(binder.getLastLon());
+            poi = binder.getPoi();
+            if(poi != null && poi.length > 0){
+                sendMsg.setLocation(poi[0]);
+                location.setText(poi[0]);
+            }
+
+        }
+//        mLocationClient = new LocationClient(getApplicationContext());
+//        mLocationClient.registerLocationListener(myListener);
+//        LocationClientOption option = new LocationClientOption();
+//        option.setIsNeedLocationPoiList(true);
+//        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+//        mLocationClient.setLocOption(option);
+//        mLocationClient.start();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @SuppressLint("HandlerLeak")
@@ -72,19 +97,19 @@ public class ImHereActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-                case BaiDuErrorCode.LOCATION_SUCCESS_INTERNET:
-                    BDLocation loca = (BDLocation) msg.obj;
-                    sendMsg.setLat(loca.getLatitude());
-                    sendMsg.setLon(loca.getLongitude());
-                    List<Poi> poiList = loca.getPoiList();
-                    if(poiList != null && poiList.size() > 0){
-                        sendMsg.setLocation(poiList.get(0).getName());
-                        location.setText(poiList.get(0).getName());
-                        poi = new String[poiList.size()];
-                        for (int i = 0 ; i < poiList.size() ;i++)
-                            poi[i] = poiList.get(i).getName();
-                    }
-                    break;
+//                case BaiDuErrorCode.LOCATION_SUCCESS_INTERNET:
+//                    BDLocation loca = (BDLocation) msg.obj;
+//                    sendMsg.setLat(loca.getLatitude());
+//                    sendMsg.setLon(loca.getLongitude());
+//                    List<Poi> poiList = loca.getPoiList();
+//                    if(poiList != null && poiList.size() > 0){
+//                        sendMsg.setLocation(poiList.get(0).getName());
+//                        location.setText(poiList.get(0).getName());
+//                        poi = new String[poiList.size()];
+//                        for (int i = 0 ; i < poiList.size() ;i++)
+//                            poi[i] = poiList.get(i).getName();
+//                    }
+//                    break;
 
             }
 
@@ -100,13 +125,8 @@ public class ImHereActivity extends AppCompatActivity {
         }
 
         T.s(ctx,"我要发送了！");
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://169.254.218.145:8080/imheres/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        HttpService httpService = retrofit.create(HttpService.class);
-        Call<Object> objectCall = httpService.addMessage(sendMsg);
 
+        Call<Object> objectCall = httpService.addMessage(sendMsg);
         objectCall.enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
@@ -144,18 +164,18 @@ public class ImHereActivity extends AppCompatActivity {
         }
     }
 
-    //百度定位的回调监听
-    class MyLocationListener extends BDAbstractLocationListener {
-
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            int errorCode = location.getLocType();
-            if(errorCode == BaiDuErrorCode.LOCATION_SUCCESS_INTERNET || errorCode == BaiDuErrorCode.LOCATION_SUCCESS_GPS){
-                mHandler.obtainMessage(BaiDuErrorCode.LOCATION_SUCCESS_INTERNET,location).sendToTarget();
-            }else{
-                L.e(TAG,"location error code: " + errorCode);
-            }
-            mLocationClient.stop();
-        }
-    }
+//    //百度定位的回调监听
+//    class MyLocationListener extends BDAbstractLocationListener {
+//
+//        @Override
+//        public void onReceiveLocation(BDLocation location) {
+//            int errorCode = location.getLocType();
+//            if(errorCode == BaiDuErrorCode.LOCATION_SUCCESS_INTERNET || errorCode == BaiDuErrorCode.LOCATION_SUCCESS_GPS){
+//                mHandler.obtainMessage(BaiDuErrorCode.LOCATION_SUCCESS_INTERNET,location).sendToTarget();
+//            }else{
+//                L.e(TAG,"location error code: " + errorCode);
+//            }
+//            mLocationClient.stop();
+//        }
+//    }
 }

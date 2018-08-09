@@ -35,13 +35,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_whocame_item, parent, false);
 
-        L.e(TAG,"hehe1");
+        //L.e(TAG,"hehe1");
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        L.e(TAG,"hehe2" + position);
+        //L.e(TAG,"hehe2" + position);
         CardBase cardBase = cards.get(position);
         holder.message.setText(cardBase.getMessage());
         holder.time.setText(cardBase.getTime());
