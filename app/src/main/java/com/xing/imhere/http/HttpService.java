@@ -2,6 +2,7 @@ package com.xing.imhere.http;
 
 import com.xing.imhere.base.LoginResult;
 import com.xing.imhere.base.Message;
+import com.xing.imhere.base.RegisterResult;
 
 import java.util.List;
 
@@ -9,6 +10,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -23,4 +26,16 @@ public interface HttpService {
 
     @GET("login")
     Call<LoginResult> login(@Query("account")String account,@Query("pass")String pass);
+
+    @GET("register/{account}")
+    Call<RegisterResult> register(@Path("account")String account);
+
+    @GET("register/ensureCode/{account}")
+    Call<RegisterResult> confirmEnsureCode(@Path("account")String account,@Query("ensureCode")String ensureCode);
+
+    @GET("register/resetEnsureCode/{account}")
+    Call<RegisterResult> resetEnsureCode(@Path("account")String account);
+
+    @PUT("register/putPass/{account}")
+    Call<RegisterResult> resetPass(@Path("account")String account,@Query("pass")String pass);
 }

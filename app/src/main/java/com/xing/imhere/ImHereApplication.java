@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by xinG on 2018/8/2 0002.
  */
 public class ImHereApplication extends Application implements ServiceConnection{
-    private Intent service ;
+    private Intent service;
     private BDLocationService.Binder mBinder;
 
     private Retrofit retrofit;
@@ -43,7 +43,9 @@ public class ImHereApplication extends Application implements ServiceConnection{
                 .baseUrl(ImHereHttpUrl.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        HttpService httpService = retrofit.create(HttpService.class);
+
+        httpService = retrofit.create(HttpService.class);
+        L.e(TAG,"httpService init with " + httpService);
     }
 
     public void stopService() {
@@ -59,6 +61,7 @@ public class ImHereApplication extends Application implements ServiceConnection{
     }
 
     public HttpService getHttpService() {
+        //L.e(TAG,"httpService init with " + httpService);
         return httpService;
     }
 

@@ -39,21 +39,22 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
-
         <activity android:name=".activity.WhoCameActivity">
+        </activity>
+        <activity android:name=".activity.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.ImHereActivity">
-        </activity>
+        <activity android:name=".activity.ImHereActivity"></activity>
 
         <service
             android:name="com.baidu.location.f"
-            android:enabled="true"/>
-        <!--出了很神奇的错误，在BDLocationService中使用了百度地图的定位功能
+            android:enabled="true" />
+        <!--
+            出了很神奇的错误，在BDLocationService中使用了百度地图的定位功能
             一开始在Activity中启动卸载服务都很正常能定位成功
             后来想把Service集成为全局变量于是改在Application中启动
             但是报了莫名的错误，大概分成两种情况
@@ -67,7 +68,11 @@
             出错代码：android:process=":remote",此代码为百度官方文档提供
         -->
 
-        <service android:name=".service.BDLocationService"/>
+        <service android:name=".service.BDLocationService" />
+
+        <activity android:name=".activity.TestActivity">
+
+        </activity>
     </application>
 
 </manifest>

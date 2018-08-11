@@ -9,4 +9,21 @@
     <string name="submit">发表</string>
     <string name="saysth">说点什么吧...</string>
     <string name="location">地点</string>
+
+
+    <string name="register_registered">该手机已被注册。</string>
+    <string name="register_register_success">验证码发送成功。</string>
+    <string name="register_ensure_out_time">您没有在规定时间内输入正确的验证码哦。</string>
+    <string name="register_ensure_error">验证码错误。</string>
+    <string name="register_sth_unknown_happen">啊偶，发生了未预料到的错误呢。</string>
+    <string name="register_sth_happen">这件事本不该发生，但我懒得分析为啥发生了。</string>
+    <string name="register_not_registering">此账号不在注册状态哦。</string>
+    <string name="register_pass_repeat_error">两次输入的密码不一致。</string>
+    <string name="register_reset_pass_fail">修改密码失败。</string>
+    <string name="register_account_not_exist">帐号不存在。</string>
+    <string name="register_reset_code_fail">重置验证码失败。</string>
+    <string name="register_reset_code_success">重置验证码成功。</string>
+
+    <string name="ensure_normal">获取验证码</string>
+    <string name="ensure_reset">重置验证码</string>
 </resources>
