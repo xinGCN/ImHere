@@ -86,24 +86,34 @@ public class WhoCameActivity extends AppCompatActivity {
             }
         });
 
-
-        if(binder != null && binder.isImmediate()){
-            Call<List<Message>> msgsCall = httpService.getMessages(binder.getLastLat(), binder.getLastLon());
-
-            msgsCall.enqueue(new Callback<List<Message>>() {
-                @Override
-                public void onResponse(Call<List<Message>> call, Response<List<Message>> resp) {
-                    L.e(TAG,resp.body()==null?"null":resp.body().toString());
-                    cards.addAll(Message.toCardBases(resp.body()));
-                    cardAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onFailure(Call<List<Message>> call, Throwable t) {
-                    L.e(TAG,t.getMessage());
-                }
-            });
+        List<Message> msgs = new ArrayList<>();
+        for(int i = 0 ; i < 10 ;i++){
+            Message msg = new Message();
+            msg.setMessage("im " + i);
+            msg.setTime("time" + i);
+            msgs.add(msg);
         }
+        cards.addAll(Message.toCardBases(msgs));
+        cardAdapter.notifyDataSetChanged();
+
+//网络请求刷新数据
+//        if(binder != null && binder.isImmediate()){
+//            Call<List<Message>> msgsCall = httpService.getMessages(binder.getLastLat(), binder.getLastLon());
+//
+//            msgsCall.enqueue(new Callback<List<Message>>() {
+//                @Override
+//                public void onResponse(Call<List<Message>> call, Response<List<Message>> resp) {
+//                    L.e(TAG,resp.body()==null?"null":resp.body().toString());
+//                    cards.addAll(Message.toCardBases(resp.body()));
+//                    cardAdapter.notifyDataSetChanged();
+//                }
+//
+//                @Override
+//                public void onFailure(Call<List<Message>> call, Throwable t) {
+//                    L.e(TAG,t.getMessage());
+//                }
+//            });
+//        }
 
     }
 

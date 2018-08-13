@@ -76,13 +76,6 @@ public class ImHereActivity extends AppCompatActivity {
             }
 
         }
-//        mLocationClient = new LocationClient(getApplicationContext());
-//        mLocationClient.registerLocationListener(myListener);
-//        LocationClientOption option = new LocationClientOption();
-//        option.setIsNeedLocationPoiList(true);
-//        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-//        mLocationClient.setLocOption(option);
-//        mLocationClient.start();
 
     }
 
@@ -97,20 +90,6 @@ public class ImHereActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-//                case BaiDuErrorCode.LOCATION_SUCCESS_INTERNET:
-//                    BDLocation loca = (BDLocation) msg.obj;
-//                    sendMsg.setLat(loca.getLatitude());
-//                    sendMsg.setLon(loca.getLongitude());
-//                    List<Poi> poiList = loca.getPoiList();
-//                    if(poiList != null && poiList.size() > 0){
-//                        sendMsg.setLocation(poiList.get(0).getName());
-//                        location.setText(poiList.get(0).getName());
-//                        poi = new String[poiList.size()];
-//                        for (int i = 0 ; i < poiList.size() ;i++)
-//                            poi[i] = poiList.get(i).getName();
-//                    }
-//                    break;
-
             }
 
         }
@@ -164,18 +143,4 @@ public class ImHereActivity extends AppCompatActivity {
         }
     }
 
-//    //百度定位的回调监听
-//    class MyLocationListener extends BDAbstractLocationListener {
-//
-//        @Override
-//        public void onReceiveLocation(BDLocation location) {
-//            int errorCode = location.getLocType();
-//            if(errorCode == BaiDuErrorCode.LOCATION_SUCCESS_INTERNET || errorCode == BaiDuErrorCode.LOCATION_SUCCESS_GPS){
-//                mHandler.obtainMessage(BaiDuErrorCode.LOCATION_SUCCESS_INTERNET,location).sendToTarget();
-//            }else{
-//                L.e(TAG,"location error code: " + errorCode);
-//            }
-//            mLocationClient.stop();
-//        }
-//    }
 }

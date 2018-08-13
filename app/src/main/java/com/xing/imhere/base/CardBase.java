@@ -8,6 +8,15 @@ public class CardBase {
 
     private String message;
     private String time;
+    private boolean isExpand;
+
+    public boolean isExpand() {
+        return isExpand;
+    }
+
+    public void setExpand(boolean expand) {
+        isExpand = expand;
+    }
 
     public CardBase(String message, String time) {
         this.message = message;

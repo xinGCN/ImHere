@@ -29,10 +29,4 @@ public class RegisterActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction().replace(R.id.container,rFragment).commit();
     }
 
-//    @OnClick(R.id.hehe)
-//    public void confirm(){
-//        getFragmentManager().beginTransaction().replace(R.id.container,pFragment).commit();
-//        //getFragmentManager().beginTransaction().hide(rFragment);
-//    }
-
 }
