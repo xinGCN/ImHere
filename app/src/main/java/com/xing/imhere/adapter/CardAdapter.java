@@ -6,20 +6,26 @@ import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.xing.imhere.R;
 import com.xing.imhere.base.CardBase;
+import com.xing.imhere.base.Comment;
 import com.xing.imhere.util.L;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,11 +40,6 @@ import butterknife.ButterKnife;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private static final String TAG = "CardAdapter";
     private List<CardBase> cards;
-
-    private ValueAnimator mOpenValueAnimator;
-    private ValueAnimator mCloseValueAnimator;
-
-
 
     public CardAdapter(List<CardBase> cards) {
         L.e(TAG,cards.toString());
@@ -66,11 +67,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             public void onClick(View v) {
                 L.e(TAG,"我被点击了");
 
-
-                if (cardBase.isExpand())
+                if (!cardBase.isExpand()){
                     holder.animOpen();
-                else
+                    cardBase.setExpand(true);
+                }
+                else{
                     holder.animClose();
+                    cardBase.setExpand(false);
+                }
             }
         });
     }
@@ -97,6 +101,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         @BindView(R.id.activity_whocame_item_time) TextView time;
         @BindView(R.id.activity_whocame_item_expand) ImageView expand;
         @BindView(R.id.activity_whocame_item_expand_layout) LinearLayout expandLayout;
+        @BindView(R.id.activity_whocame_item_comment) RecyclerView cmtsView;
+
+        private List<Comment> cmts;
+        private CommentAdapter cmtAdapter;
 
         private ValueAnimator mOpenValueAnimator;
         private ValueAnimator mCloseValueAnimator;
@@ -107,54 +115,56 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this,itemView);
 
-//            message.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (text.getVisibility() == View.VISIBLE) {
-//                        animClose(text);
-//                    } else {
-//                        animOpen(text);
-//                    }
-//                }
-//            });
             itemView.setOnClickListener(this);
+
+//            cmts = new ArrayList<>();
+//            cmts.add(new Comment("你好1"));
+//            cmts.add(new Comment("你好2"));
+//            cmts.add(new Comment("你好3"));
+//            cmts.add(new Comment("你好4"));
+//            cmts.add(new Comment("你好5"));
+//
+//            cmtAdapter = new CommentAdapter(cmts);
+//            cmtsView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
+//            cmtsView.setAdapter(cmtAdapter);
         }
 
 
         private void animOpen(){
-            RotateAnimation ra = new RotateAnimation(0,90,50,50);
+            L.e(TAG,"animOpen");
+            Animation ra  = new RotateAnimation(0, 90, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
             ra.setFillAfter(true);
-            ra.setDuration(1000);
+            ra.setDuration(500);
             expand.startAnimation(ra);
 
-//            View view = expandLayout;
-//            view.setVisibility(View.VISIBLE);
-//            view.setAlpha(0);
-//            if (mOpenValueAnimator == null) {
-//                mOpenValueAnimator = createDropAnim(view,0, mHiddenViewMeasuredHeight);
-//            }
-//            mOpenValueAnimator.start();
+            expandLayout.setVisibility(View.VISIBLE);
+            expandLayout.setAlpha(0);
+            if (mOpenValueAnimator == null) {
+                mOpenValueAnimator = createDropAnim(expandLayout,0, mHiddenViewMeasuredHeight);
+            }
+            mOpenValueAnimator.start();
         }
 
         private void animClose(){
-            RotateAnimation ra = new RotateAnimation(90,0,50,50);
+            L.e(TAG,"animClose");
+            Animation ra  = new RotateAnimation(90, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
             ra.setFillAfter(true);
-            ra.setDuration(1000);
+            ra.setDuration(500);
             expand.startAnimation(ra);
 
-//            final View view = expandLayout;
-//            int origHeight = view.getHeight();
-//            view.setAlpha(1);
-//            if (mCloseValueAnimator == null) {
-//                mCloseValueAnimator = createDropAnim(view, origHeight, 0);
-//                mCloseValueAnimator.addListener(new AnimatorListenerAdapter() {
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        view.setVisibility(View.GONE);
-//                    }
-//                });
-//            }
-//            mCloseValueAnimator.start();
+            final View view = expandLayout;
+            int origHeight = view.getHeight();
+            view.setAlpha(1);
+            if (mCloseValueAnimator == null) {
+                mCloseValueAnimator = createDropAnim(view, origHeight, 0);
+                mCloseValueAnimator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        view.setVisibility(View.GONE);
+                    }
+                });
+            }
+            mCloseValueAnimator.start();
         }
 
         /**

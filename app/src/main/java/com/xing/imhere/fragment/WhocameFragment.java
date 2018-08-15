@@ -1,25 +1,27 @@
-package com.xing.imhere.activity;
+package com.xing.imhere.fragment;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.xing.imhere.ImHereApplication;
 import com.xing.imhere.R;
+import com.xing.imhere.activity.ImHereActivity;
 import com.xing.imhere.adapter.CardAdapter;
 import com.xing.imhere.base.CardBase;
 import com.xing.imhere.base.Message;
 import com.xing.imhere.http.HttpService;
-import com.xing.imhere.http.ImHereHttpUrl;
 import com.xing.imhere.service.BDLocationService;
-import com.xing.imhere.util.L;
 import com.xing.imhere.util.T;
 
 import java.util.ArrayList;
@@ -28,63 +30,40 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by xinG on 2018/8/6 0006.
+ * Created by xinG on 2018/8/14 0014.
  */
-public class WhoCameActivity extends AppCompatActivity {
+public class WhocameFragment extends Fragment {
     @BindView(R.id.activity_whocame_recycleView)
     RecyclerView recycle;
     CardAdapter cardAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     List<CardBase> cards;
 
-    @BindView(R.id.activity_whocame_bottom_navigation)
-    BottomNavigationView bottomView;
-
-    private Context ctx;
-    private static final String TAG = "WhocameActivity";
+    private Activity ctx;
+    private static final String TAG = "WhocameFragment";
 
     private BDLocationService.Binder binder;
     private HttpService httpService;
 
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_whocame);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View v =  inflater.inflate(R.layout.fragment_whcame,container,false);
+        ButterKnife.bind(this,v);
 
-        ctx = WhoCameActivity.this;
+        ctx = getActivity();
 
-        binder = ((ImHereApplication)getApplication()).getmBinder();
-        httpService = ((ImHereApplication)getApplication()).getHttpService();
+        binder = ((ImHereApplication)ctx.getApplication()).getmBinder();
+        httpService = ((ImHereApplication)ctx.getApplication()).getHttpService();
 
         cards = new ArrayList<>();
-        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new LinearLayoutManager(ctx);
         recycle.setLayoutManager(mLayoutManager);
         cardAdapter = new CardAdapter(cards);
         recycle.setAdapter(cardAdapter);
-
-        bottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.bottom_navigation_whocame:
-                        T.s(ctx,"Im whocame");
-                        break;
-                    case R.id.bottom_navigation_user:
-                        T.s(ctx,"Im user");
-                        break;
-                }
-                return false;
-            }
-        });
 
         List<Message> msgs = new ArrayList<>();
         for(int i = 0 ; i < 10 ;i++){
@@ -115,16 +94,6 @@ public class WhoCameActivity extends AppCompatActivity {
 //            });
 //        }
 
-    }
-
-    @OnClick(R.id.activity_whocame_fab)
-    public void imHere(){
-        startActivity(new Intent(ctx,ImHereActivity.class));
-    }
-
-    @Override
-    protected void onDestroy() {
-        ((ImHereApplication)getApplication()).stopService();
-        super.onDestroy();
+        return v;
     }
 }

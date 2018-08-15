@@ -3,10 +3,10 @@
     <item
         android:id="@+id/bottom_navigation_whocame"
         android:title="@string/app_name"
-        android:icon="@mipmap/ic_launcher"/>
+        android:icon="@drawable/like"/>
 
     <item
         android:id="@+id/bottom_navigation_user"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/dislike"
         android:title="@string/user"/>
 </menu>
