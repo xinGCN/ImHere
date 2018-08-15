@@ -11,6 +11,28 @@ public class User {
     private String account;
     private String pass;
     private String username;
+    private String friends;
+    private String usersig;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", pass='" + pass + '\'' +
+                ", username='" + username + '\'' +
+                ", friends='" + friends + '\'' +
+                ", usersig='" + usersig + '\'' +
+                '}';
+    }
+
+    public String getUsersig() {
+        return usersig;
+    }
+
+    public void setUsersig(String usersig) {
+        this.usersig = usersig;
+    }
 
     public Integer getId() {
         return id;
@@ -44,13 +66,12 @@ public class User {
         this.username = username;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", account='" + account + '\'' +
-                ", pass='" + pass + '\'' +
-                ", username='" + username + '\'' +
-                '}';
+    public String getFriends() {
+        return friends;
     }
+
+    public void setFriends(String friends) {
+        this.friends = friends;
+    }
+
 }

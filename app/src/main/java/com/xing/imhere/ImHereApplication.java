@@ -5,9 +5,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Environment;
 import android.os.IBinder;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.tencent.imsdk.TIMLogLevel;
+import com.tencent.imsdk.TIMManager;
+import com.tencent.imsdk.TIMSdkConfig;
 import com.xing.imhere.http.HttpService;
 import com.xing.imhere.http.ImHereHttpUrl;
 import com.xing.imhere.service.BDLocationService;
@@ -27,6 +31,7 @@ public class ImHereApplication extends Application implements ServiceConnection{
     private HttpService httpService;
 
     private static final String TAG = "ImHereApplication";
+    private static final int sdkAppId = 1400125094;
 
     @Override
     public void onCreate() {
@@ -46,6 +51,19 @@ public class ImHereApplication extends Application implements ServiceConnection{
 
         httpService = retrofit.create(HttpService.class);
         L.e(TAG,"httpService init with " + httpService);
+
+        initTencent();
+    }
+
+    private void initTencent() {
+        TIMSdkConfig config = new TIMSdkConfig(sdkAppId)
+                .enableCrashReport(false)
+                .enableLogPrint(true)
+                .setLogLevel(TIMLogLevel.DEBUG)
+                .setLogPath(Environment.getExternalStorageDirectory().getPath() + "/justfortest/");
+
+        TIMManager.getInstance().init(this,config);
+
     }
 
     public void stopService() {

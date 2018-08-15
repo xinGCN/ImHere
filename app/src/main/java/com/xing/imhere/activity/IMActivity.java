@@ -43,9 +43,7 @@ import java.util.List;
 public class IMActivity extends AppCompatActivity {
     private TIMManager timManager = TIMManager.getInstance();
     private static final String tag = "IMActivity";
-    private static final int sdkAppId = 1400125094;
-    private static final String userSig = "eJxlzstOg0AUgOE9T0Fmq9FhLiSYdAFICwoVisbGzYTLQEctTGEktabvXkWjJJ6z-L-knA9N13VwH6YXWVG0b41i6l1yoF-pAILzvyilKFmmGO7Kf5Hvpeg4yyrFuzEalFIE4dSIkjdKVOJXWJZJPhfTCerLFzZe*jYEQgNRaJEpEfUYIy9xA3cTV3c*FivfV9fL8mnnmCkcmnZ4fXYP1PTivI4dL0-WYWULx57LfYWWYZTeLB7n*GGNbld5QhcbGdlEojg4FP1lsDvbxvVsNjmpxJb-PI0JIhRDPKkD73rRNiNA0KAGwvBrgHbUTs13XIk_";
-
+    private static final String userSig = "eJxlzlFPgzAQwPF3PgXhdUZLSzGY7KE4SM1kMqfOPTWEdnhToYNuiMbvvolGSbx7-P*Suw-Ltm3n7npxmuV5tSuNMJ1Wjn1hO8g5*YtagxSZEaSW-6J601Arka2NqvvoUkoxQkMDUpUG1vArgsD3jkvoADXyWfSXvo2HkIspCrwhgaKPSTS-vAql*4Lj97OHJp3cRKvH4HaSMN6hguwgXLZTzuMZ38KT3kgGbMO47*dJ6YWNljHrQrxYkjbeR1PZ8HS0uh-pWdXOy3RbjMeDkwZe1c-TxMPBOcZ4UPeqbqAqe4CRS11M0Nc41qd1AM6LXOU_";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,13 +74,6 @@ public class IMActivity extends AppCompatActivity {
             }
         });
 
-        TIMSdkConfig config = new TIMSdkConfig(sdkAppId)
-                .enableCrashReport(false)
-                .enableLogPrint(true)
-                .setLogLevel(TIMLogLevel.DEBUG)
-                .setLogPath(Environment.getExternalStorageDirectory().getPath() + "/justfortest/");
-
-        timManager.init(this,config);
 
 
         //基本用户配置
@@ -172,7 +163,7 @@ public class IMActivity extends AppCompatActivity {
 //将用户配置与通讯管理器进行绑定
         timManager.setUserConfig(userConfig);
 
-        timManager.login("13004476205", userSig, new TIMCallBack() {
+        timManager.login("15996464635", userSig, new TIMCallBack() {
             @Override
             public void onError(int code, String desc) {
                 //错误码 code 和错误描述 desc，可用于定位请求失败原因
@@ -188,7 +179,7 @@ public class IMActivity extends AppCompatActivity {
     }
 
     public void click(View v){
-        String peer = "15996464635";  //获取与用户 "sample_user_1" 的会话
+        String peer = "13004476205";  //获取与用户 "sample_user_1" 的会话
         TIMConversation conversation = TIMManager.getInstance().getConversation(
                 TIMConversationType.C2C,    //会话类型：单聊
                 peer);
@@ -198,7 +189,7 @@ public class IMActivity extends AppCompatActivity {
 
 //添加文本内容
         TIMTextElem elem = new TIMTextElem();
-        elem.setText("a new msg");
+        elem.setText("a new msg from 159 to 130");
 
 //将elem添加到消息
         if(msg.addElement(elem) != 0) {

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bjmgf_message_item_sl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:id="@+id/bjmgf_message_item_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/fragment_message_recycle_item_user_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/custom_man_head" />
+
+        <TextView
+            android:id="@+id/fragment_message_recycle_item_date"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/fragment_message_recycle_item_user_image"
+            android:layout_marginRight="10dp"
+            android:text="星期三"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:gravity="right"/>
+
+        <TextView
+            android:id="@+id/fragment_message_recycle_item_top_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="60dp"
+            android:text="火星来客"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_alignLeft="@id/fragment_message_recycle_item_user_image"
+            android:layout_alignTop="@id/fragment_message_recycle_item_user_image"
+            android:layout_alignRight="@id/fragment_message_recycle_item_date"
+            android:layout_marginRight="60dp"/>
+
+        <TextView
+            android:id="@+id/fragment_message_recycle_item_bottom_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="[惬意]"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_below="@id/fragment_message_recycle_item_top_name"
+            android:layout_alignLeft="@id/fragment_message_recycle_item_user_image"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_alignRight="@id/fragment_message_recycle_item_date"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/fragment_message_recycle_item_user_image"
+            android:layout_toRightOf="@id/fragment_message_recycle_item_user_image"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
+
+</FrameLayout>
