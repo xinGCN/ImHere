@@ -4,6 +4,11 @@
 
 开工加油！
 
+##关于
+IM部分的界面学习了
+https://github.com/xiangyunwan/imdemo-master
+的作品，实际使用里对相当一部分做了简化，非常感谢提供思路
+
 记录一些遇到的问题：
 1、虚拟机无法正常使用百度定位，有时能用但大部分情况在获得定位权限的情况下报167错误：
     http://lbsyun.baidu.com/index.php?title=android-locsdk/qa，见第13条的第9条

@@ -9,4 +9,15 @@
 
     <color name="divider">#e0e0e0</color>
 
+    <color name="activity_chat_title_bg">#EAEAEC</color>
+    <color name="activity_chat_edit">#DEDEDE</color>
+    <color name="activity_chat_board_line">#CACACA</color>
+    <color name="activity_chat_board_line_bottom">#E9E9E9</color>
+    <color name="activity_chat_emoji_selected">#CCCCCC</color>
+    <color name="activity_chat_face_text">#aeaeae</color>
+    <color name="activity_chat_face_type">#e0e0e0</color>
+    <color name="activity_chat_dropdown_gray">#737373</color>
+    <color name="activity_chat_list_msg_item_time_bg">#DBDBDB</color>
+    <color name="activity_chat_list_msg_bg">#F1F1F1</color>
+    <color name="activity_chat_hold_speak">#13B2FF</color>
 </resources>

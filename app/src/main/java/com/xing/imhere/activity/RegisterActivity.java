@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         rFragment = new RegisterFragment();
         pFragment = new ResetPassFragment();
-        getFragmentManager().beginTransaction().replace(R.id.container,rFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,rFragment).commit();
     }
 
 }

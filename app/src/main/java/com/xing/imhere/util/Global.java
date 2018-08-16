@@ -12,10 +12,7 @@ import java.util.Map;
  * Created by xinG on 2018/8/15 0015.
  */
 public class Global {
-    public static List<Emoji> EMOJIS = null;
-    public static Map<String, String> EMOJISCODE = null;
-
     public static User user = null;
-    public static List<com.xing.imhere.base.Message> msgs = null;
+    public static List<com.xing.imhere.base.Message> MESSAGES = null;
 
 }

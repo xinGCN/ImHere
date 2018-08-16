@@ -1,5 +1,7 @@
 package com.xing.imhere.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xing.imhere.R;
+import com.xing.imhere.activity.ChatActivity;
 import com.xing.imhere.base.ui.Message;
 
 import java.util.List;
@@ -21,6 +24,7 @@ import butterknife.ButterKnife;
  */
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
     private List<Message> msgs;
+    private Context ctx;
 
     public MessageAdapter(List<Message> msgs){
         this.msgs = msgs;
@@ -29,7 +33,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+        ctx = parent.getContext();
+        View v = LayoutInflater.from(ctx)
                 .inflate(R.layout.fragment_message_recycle_item, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -39,6 +44,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Message msg = msgs.get(position);
         holder.user.setText(msg.getNickName());
+
+        holder.user.setOnClickListener(v -> {
+            Intent i = new Intent(ctx, ChatActivity.class);
+            i.putExtra("peer",msg.getNickName());
+            ctx.startActivity(i);
+        });
     }
 
     @Override

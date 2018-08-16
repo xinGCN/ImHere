@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity{
             public void onResponse(Call<LoginResult> call, Response<LoginResult> resp) {
                 if(resp.code() == 200 && resp.body().getCode() == LoginResult.SUCCESS){
                     Global.user = resp.body().getUser();
-                    Global.msgs = resp.body().getMsgs();
+                    Global.MESSAGES = resp.body().getMsgs();
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                     finish();
 
