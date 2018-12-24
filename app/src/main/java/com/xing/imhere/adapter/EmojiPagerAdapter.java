@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * Created by xinG on 2018/8/16 0016.
+ * 一页Emoji的Adapter
  */
 public class EmojiPagerAdapter extends FragmentPagerAdapter {
     private List<EmojiFragment> emojiFragments;

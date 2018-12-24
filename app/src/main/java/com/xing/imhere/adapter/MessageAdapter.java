@@ -21,10 +21,12 @@ import butterknife.ButterKnife;
 
 /**
  * Created by xinG on 2018/8/15 0015.
+ * 展示联系人列表Adapter
  */
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
     private List<Message> msgs;
     private Context ctx;
+    public static final String CHAT_KEY = "chatWithWho";
 
     public MessageAdapter(List<Message> msgs){
         this.msgs = msgs;
@@ -47,7 +49,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         holder.user.setOnClickListener(v -> {
             Intent i = new Intent(ctx, ChatActivity.class);
-            i.putExtra("peer",msg.getNickName());
+            i.putExtra(CHAT_KEY,msg.getNickName());
             ctx.startActivity(i);
         });
     }

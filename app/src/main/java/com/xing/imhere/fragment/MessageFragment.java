@@ -40,6 +40,7 @@ public class MessageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_message, container, false);
         ButterKnife.bind(this,mView);
+
         init();
         return mView;
     }

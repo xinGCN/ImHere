@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by xinG on 2018/8/16 0016.
+ * 单个Emoji图片的adapter
  */
 public class EmojiGridAdapter extends BaseAdapter {
     private List<String> emojis;

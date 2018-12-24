@@ -3,7 +3,12 @@
     <item
         android:id="@+id/bottom_navigation_whocame"
         android:title="@string/app_name"
-        android:icon="@drawable/like"/>
+        android:icon="@drawable/like_normal"/>
+
+    <item
+        android:id="@+id/bottom_navigation_chat"
+        android:icon="@drawable/ic_get_in"
+        android:title="聊天"/>
 
     <item
         android:id="@+id/bottom_navigation_user"

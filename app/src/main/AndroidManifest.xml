@@ -52,24 +52,22 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="uBqdy79xYm4gNTzTDVaVROG5ue6O1ejk" />
 
-        <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login">
-
-        </activity>
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.ImHereActivity" />
-        <activity android:name=".activity.IMActivity"></activity>
-        <activity android:name=".activity.AnotherIM"></activity>
-        <activity android:name=".activity.ChatActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ImHereActivity" />
+        <activity android:name=".activity.ChatActivity">
+
+        </activity>
         <activity android:name=".activity.TestActivity" />
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity">
+
+        </activity>
+        <activity android:name=".activity.ShowMsgActivity"/>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true" />

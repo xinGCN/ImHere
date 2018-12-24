@@ -23,7 +23,9 @@ import android.widget.TextView;
 import com.xing.imhere.R;
 import com.xing.imhere.base.CardBase;
 import com.xing.imhere.base.Comment;
+import com.xing.imhere.customcontrol.CheckableImageView;
 import com.xing.imhere.util.L;
+import com.xing.imhere.util.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +104,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         @BindView(R.id.activity_whocame_item_expand) ImageView expand;
         @BindView(R.id.activity_whocame_item_expand_layout) LinearLayout expandLayout;
         @BindView(R.id.activity_whocame_item_comment) RecyclerView cmtsView;
+        @BindView(R.id.activity_whocame_item_like)CheckableImageView like;
+        @BindView(R.id.activity_whocame_item_like_sum)TextView like_sum;
 
         private List<Comment> cmts;
         private CommentAdapter cmtAdapter;
@@ -127,6 +131,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 //            cmtAdapter = new CommentAdapter(cmts);
 //            cmtsView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
 //            cmtsView.setAdapter(cmtAdapter);
+
+            like_sum.setOnClickListener(e->{
+                L.e(TAG,"like_sum click");
+            });
+
+            like.setOnClickListener(e->{
+                L.e(TAG,"like click");
+            });
         }
 
 

@@ -19,6 +19,8 @@ import butterknife.ButterKnife;
 
 /**
  * Created by xinG on 2018/8/14 0014.
+ *
+ * 卡片下的评论Adapter
  */
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
     private List<Comment> cmts;
